@@ -1,0 +1,51 @@
+/**
+	 * 获取 一个整数数组(ins)中两个数之和等于某一目标值（total）的  所有数据对
+	 * @param ins  数组【整数】
+	 * @param total 目标值 整数
+	 * @return  results 整数对列表
+	 */
+	public static List<int[]> getIntList(int[] ins ,int total){
+		
+		List<int[]> result = new ArrayList<int[]>();
+		if(ins==null||total<1) {
+			return null;
+		}
+		//排序 从小到大 时间复杂度: O(N*logN);
+		Arrays.sort(ins);
+		//时间复杂度  O(N)
+		for (int i = 0 ,j =ins.length-1 ; i<j; ) {
+			 int sum = ins[i] + ins[j];
+			 //两数之后等于目标值的情况
+			 if(sum==total) {
+				 int[] temp = new int[2];
+				 temp[0] = ins[i];
+				 temp[1] = ins[j];
+				 result.add(temp);
+				 System.out.println(temp[0] +"-------" +temp[1]);
+				 i++;
+				 j--;
+			 }
+			 //两数之和大于目标值的情况
+			 if(sum>total) {
+				 j--;
+			 }
+			 //两数之和小于目标值的情况
+			 if(sum<total) {
+				 i++;
+			 }
+		}
+		
+		return result;
+	}
+  
+  /***main方法**/
+  public static void main(String[] args) {
+		
+		int[]  ins1= {12,32,13,15,10,11,16,17};
+		List<int[]> a = getIntList(ins1, 28);
+		System.out.println("最后的数据对列表：" + JSONArray.fromObject(a).toString());
+ 	}
+  
+  
+  
+  
